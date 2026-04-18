@@ -12,7 +12,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float moveHorizontal;
     [SerializeField] float moveVertical;
     [SerializeField] float speed = 4;
-    [SerializeField] float rotateSpeed = 4;
+    [SerializeField] float rotateSpeed = 64;
     [SerializeField] float jumpHeight = 1.2f;
     [SerializeField] bool isJumping;
 
@@ -24,39 +24,6 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
-        // transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
-        // Vector3 forward = transform.TransformDirection(Vector3.forward);
-        // float curSpeed = speed * Input.GetAxis("Vertical");
-        // controller.SimpleMove(forward * curSpeed);
-
-        // if (Input.GetButtonDown("Jump") && groundedPlayer)
-        // {
-        //     isJumping = true;
-        //     activeChar.GetComponent<Animator>().Play("Jump");
-        //     playerVelocity.y += 10;
-        // }
-
-        // playerVelocity.y += gravityValue * Time.deltaTime;
-        // controller.Move(playerVelocity * Time.deltaTime);
-
-        // if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        // {
-        //     this.gameObject.GetComponent<CharacterController>().minMoveDistance = 0.001f;
-        //     if(isJumping == false)
-        //     {
-        //         activeChar.GetComponent<Animator>().Play("Slow Run");
-        //     }
-        // }
-
-        // else
-        // {
-        //     this.gameObject.GetComponent<CharacterController>().minMoveDistance = 0.901f;
-        //     if (isJumping == false)
-        //     {
-        //         activeChar.GetComponent<Animator>().Play("Idle");
-        //     }
-        // }
-
         groundedPlayer = controller.isGrounded;
 
         if (groundedPlayer && playerVelocity.y < 0)
@@ -82,11 +49,11 @@ public class PlayerControls : MonoBehaviour
         float curSpeed = speed * vertical;
         controller.SimpleMove(forward * curSpeed);
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && groundedPlayer)
+        if (Keyboard.current.spaceKey.isPressed && groundedPlayer)
         {
             isJumping = true;
             activeChar.GetComponent<Animator>().Play("Jump");
-            playerVelocity.y = 10f;
+            playerVelocity.y += 10;
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;

@@ -4,6 +4,7 @@ public class GemControl : MonoBehaviour
 {
     [SerializeField] int rotateSpeed = 2;
     [SerializeField] AudioSource gemCollect;
+    [SerializeField] int gemPoint = 100;
 
     void Update()
     {
@@ -13,6 +14,7 @@ public class GemControl : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         gemCollect.Play();
+        ScoreControl.totalScore += gemPoint;
         Destroy(gameObject);
     }
 }
